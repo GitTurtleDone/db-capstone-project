@@ -33,7 +33,7 @@ CREATE TABLE `bookings` (
   PRIMARY KEY (`BookingID`),
   KEY `customer_id_fk_idx` (`CustomerID`),
   CONSTRAINT `customer_id_fk` FOREIGN KEY (`CustomerID`) REFERENCES `customers` (`CustomerID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `bookings` (
 
 LOCK TABLES `bookings` WRITE;
 /*!40000 ALTER TABLE `bookings` DISABLE KEYS */;
-INSERT INTO `bookings` VALUES (1,'2025-02-01','18:50:00',12,1),(2,'2025-02-07','12:30:00',10,2),(3,'2025-02-08','19:10:00',12,6),(4,'2025-02-12','20:00:00',1,3),(5,'2025-02-13','11:30:00',2,2),(6,'2025-02-14','12:00:00',5,5),(7,'2025-02-14','19:10:00',10,4),(8,'2025-02-14','20:20:00',6,6),(10,'2022-11-12','20:10:00',3,3),(11,'2022-10-11','12:30:00',2,2),(12,'2022-10-13','20:10:00',3,1),(13,'2022-10-10','19:00:00',5,1),(14,'2022-11-12','20:10:00',3,3),(15,'2022-10-11','12:30:00',2,2),(16,'2022-10-13','20:10:00',3,1),(17,'2025-02-15',NULL,6,NULL);
+INSERT INTO `bookings` VALUES (1,'2025-02-01','18:50:00',12,1),(2,'2025-02-07','12:30:00',10,2),(3,'2025-02-08','19:10:00',12,6),(4,'2025-02-12','20:00:00',1,3),(5,'2025-02-13','11:30:00',2,2),(6,'2025-02-14','12:00:00',5,5),(7,'2025-02-14','19:10:00',10,4),(8,'2025-02-14','20:20:00',6,6),(10,'2022-11-12','20:10:00',3,3),(11,'2022-10-11','12:30:00',2,2),(12,'2022-10-13','20:10:00',3,1),(13,'2022-10-10','19:00:00',5,1),(14,'2022-11-12','20:10:00',3,3),(15,'2022-10-11','12:30:00',2,2),(16,'2022-10-13','20:10:00',3,1),(17,'2025-02-15',NULL,6,NULL),(23,'2025-02-16',NULL,6,NULL);
 /*!40000 ALTER TABLE `bookings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -507,6 +507,41 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ManageBooking` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`giang`@`%` PROCEDURE `ManageBooking`(booking_date DATE, table_no INT)
+BEGIN
+	DECLARE number_of_bookings INT;
+	START TRANSACTION;
+    INSERT INTO Bookings(BookingDate, TableNo)
+    VALUES 
+    (booking_date, table_no);
+    
+    SELECT COUNT(BookingID) INTO number_of_bookings
+    FROM Bookings
+    WHERE BookingDate = booking_date AND TableNo = table_no;
+	IF number_of_bookings > 1 THEN
+		ROLLBACK;
+        SELECT CONCAT('Table ', table_no, ' is already booked - booking cancelled') AS 'Booking Status';
+    ELSE 
+		COMMIT;
+		SELECT CONCAT('Table ', table_no, ' has been booked for ', booking_date) AS 'Booking Status';
+	END IF;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `UpdateBooking` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -557,4 +592,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-14  6:18:58
+-- Dump completed on 2025-02-14 16:43:51
