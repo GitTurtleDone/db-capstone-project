@@ -1,7 +1,7 @@
 -- @ by Thai Giang Dang, 08/02/2025, Christchurch New Zealand
 
 USE littlelemondb;
-/*
+/**/
 INSERT INTO Staff(StaffID, FirstName, LastName, Role, Address, Phone, Email, Salary) VALUES
 (1, 'Mario', 'Gollini','Manager','724, Parsley Lane, Old Town, Chicago, IL',351258074,'Mario.g@littlelemon.com',70000),
 (2, 'Adrian', 'Gollini','Assistant Manager','334, Dill Square, Lincoln Park, Chicago, IL',351474048,'Adrian.g@littlelemon.com', 65000),
@@ -198,7 +198,7 @@ FROM Orders;
 
 UPDATE Orders AS o
 SET o.DeliveryID = (SELECT d.DeliveryID FROM Deliveries d WHERE o.OrderID = d.DeliveryID);
-*/
+
 /**/
 
 
