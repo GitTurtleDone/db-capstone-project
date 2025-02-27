@@ -42,7 +42,7 @@ CREATE TABLE `bookings` (
 
 LOCK TABLES `bookings` WRITE;
 /*!40000 ALTER TABLE `bookings` DISABLE KEYS */;
-INSERT INTO `bookings` VALUES (1,'2022-10-10','12:50:00',5,1),(2,'2022-11-12','17:30:00',3,3),(3,'2022-10-11','18:10:00',2,2),(4,'2025-10-13','20:30:00',2,1),(5,'2025-02-01','18:50:00',12,1),(6,'2025-02-07','12:30:00',10,2),(7,'2025-02-08','19:10:00',12,6),(8,'2025-02-12','20:00:00',1,3),(9,'2025-02-13','11:30:00',2,2),(10,'2025-02-14','12:00:00',5,5),(11,'2025-02-14','19:10:00',10,4),(12,'2025-02-14','20:20:00',6,6),(13,'2025-02-28',NULL,6,NULL),(99,'2022-12-10',NULL,99,99);
+INSERT INTO `bookings` VALUES (1,'2022-10-10','12:50:00',5,1),(2,'2022-11-12','17:30:00',3,3),(3,'2022-10-11','18:10:00',2,2),(4,'2025-10-13','20:30:00',2,1),(5,'2025-02-01','18:50:00',12,1),(6,'2025-02-07','12:30:00',10,2),(7,'2025-02-08','19:10:00',12,6),(8,'2025-02-12','20:00:00',1,3),(9,'2025-02-13','11:30:00',2,2),(10,'2025-02-14','12:00:00',5,5),(11,'2025-02-14','19:10:00',10,4),(12,'2025-02-14','20:20:00',6,6);
 /*!40000 ALTER TABLE `bookings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -69,7 +69,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (1,'Anna','Iversen','anna.iversen@gmail.com',351259642),(2,'Joakim','Iversen','j.iversen@yahoo.com',352253781),(3,'Vanessa','McCarthy','vanessa.m@globalsuperstore.com',361255597),(4,'Marcos','Romero','marcos.romero2208@mangatagallo.us',451252112),(5,'Hiroki','Yamane','hyamane.smile@mitsubishi.com',359439642),(6,'Diana','Pinto','diana.pinto@finance.org.us',751100242),(99,NULL,NULL,NULL,NULL);
+INSERT INTO `customers` VALUES (1,'Anna','Iversen','anna.iversen@gmail.com',351259642),(2,'Joakim','Iversen','j.iversen@yahoo.com',352253781),(3,'Vanessa','McCarthy','vanessa.m@globalsuperstore.com',361255597),(4,'Marcos','Romero','marcos.romero2208@mangatagallo.us',451252112),(5,'Hiroki','Yamane','hyamane.smile@mitsubishi.com',359439642),(6,'Diana','Pinto','diana.pinto@finance.org.us',751100242);
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -262,6 +262,10 @@ LOCK TABLES `staff` WRITE;
 INSERT INTO `staff` VALUES (1,'Mario','Gollini','Manager','724, Parsley Lane, Old Town, Chicago, IL',351258074,'Mario.g@littlelemon.com',70000.00),(2,'Adrian','Gollini','Assistant Manager','334, Dill Square, Lincoln Park, Chicago, IL',351474048,'Adrian.g@littlelemon.com',65000.00),(3,'Giorgos','Dioudis','Head Chef','879 Sage Street, West Loop, Chicago, IL',351970582,'Giorgos.d@littlelemon.com',50000.00),(4,'Fatma','Kaya','Assistant Chef','132  Bay Lane, Chicago, IL',351963569,'Fatma.k@littlelemon.com',45000.00),(5,'Elena','Salvai','Head Waiter','989 Thyme Square, EdgeWater, Chicago, IL',351074198,'Elena.s@littlelemon.com',40000.00),(6,'John','Millar','Receptionist','245 Dill Square, Lincoln Park, Chicago, IL',351584508,'John.m@littlelemon.com',35000.00);
 /*!40000 ALTER TABLE `staff` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'littlelemondb'
+--
 
 --
 -- Dumping routines for database 'littlelemondb'
@@ -618,4 +622,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-27 10:30:53
+-- Dump completed on 2025-02-28  6:14:39
