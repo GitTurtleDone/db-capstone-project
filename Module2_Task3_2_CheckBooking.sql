@@ -11,10 +11,10 @@ BEGIN
     WHERE BookingDate = booking_date AND TableNo = table_no;
     SELECT 
 		CASE 
-			WHEN number_of_bookings > 0 THEN CONCAT('Table ', table_no, ' is already booked')
+			WHEN number_of_bookings > 0 THEN CONCAT('Table ', table_no, ' is already booked on ', booking_date)
             ELSE CONCAT('Table ', table_no, ' is available on ', booking_date)
 		END AS 'Booking Status';
 END $$
 DELIMITER ;
 
-CALL CheckBooking('2025-02-01', 12);
+CALL CheckBooking('2025-02-01', 10);

@@ -6,18 +6,20 @@ DELIMITER $$
 
 CREATE PROCEDURE AddValidBooking(booking_date DATE, table_no INT)
 BEGIN
-	DECLARE number_of_bookings INT;
+	DECLARE number_of_bookings, max_booking_id INT;
 	START TRANSACTION;
-    INSERT INTO Bookings(BookingDate, TableNo)
+    SELECT Max(BookingID) INTO max_booking_id
+    FROM Bookings;
+    INSERT INTO Bookings(BookingID, BookingDate, TableNo)
     VALUES 
-    (booking_date, table_no);
+    (max_booking_id+1, booking_date, table_no);
     
     SELECT COUNT(BookingID) INTO number_of_bookings
     FROM Bookings
     WHERE BookingDate = booking_date AND TableNo = table_no;
 	IF number_of_bookings > 1 THEN
 		ROLLBACK;
-        SELECT CONCAT('Table ', table_no, ' is already booked - booking cancelled') AS 'Booking Status';
+        SELECT CONCAT('Table ', table_no, ' is already booked on ', booking_date, ' - booking cancelled') AS 'Booking Status';
     ELSE 
 		COMMIT;
 		SELECT CONCAT('Table ', table_no, ' has been booked for ', booking_date) AS 'Booking Status';

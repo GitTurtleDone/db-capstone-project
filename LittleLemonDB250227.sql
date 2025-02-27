@@ -25,15 +25,15 @@ DROP TABLE IF EXISTS `bookings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bookings` (
-  `BookingID` int NOT NULL AUTO_INCREMENT,
+  `BookingID` int NOT NULL,
   `BookingDate` date NOT NULL,
   `BookingTime` time DEFAULT NULL,
   `TableNo` int DEFAULT NULL,
   `CustomerID` int DEFAULT NULL,
   PRIMARY KEY (`BookingID`),
   KEY `customer_id_fk_idx` (`CustomerID`),
-  CONSTRAINT `customer_id_fk` FOREIGN KEY (`CustomerID`) REFERENCES `customers` (`CustomerID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `customer_id_fk` FOREIGN KEY (`CustomerID`) REFERENCES `customers` (`CustomerID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `bookings` (
 
 LOCK TABLES `bookings` WRITE;
 /*!40000 ALTER TABLE `bookings` DISABLE KEYS */;
-INSERT INTO `bookings` VALUES (1,'2025-02-01','18:50:00',12,1),(2,'2025-02-07','12:30:00',10,2),(3,'2025-02-08','19:10:00',12,6),(4,'2025-02-12','20:00:00',1,3),(5,'2025-02-13','11:30:00',2,2),(6,'2025-02-14','12:00:00',5,5),(7,'2025-02-14','19:10:00',10,4),(8,'2025-02-14','20:20:00',6,6),(10,'2022-11-12','20:10:00',3,3),(11,'2022-10-11','12:30:00',2,2),(12,'2022-10-13','20:10:00',3,1),(13,'2022-10-10','19:00:00',5,1),(14,'2022-11-12','20:10:00',3,3),(15,'2022-10-11','12:30:00',2,2),(16,'2022-10-13','20:10:00',3,1),(17,'2025-02-15',NULL,6,NULL),(23,'2025-02-16',NULL,6,NULL);
+INSERT INTO `bookings` VALUES (1,'2022-10-10','12:50:00',5,1),(2,'2022-11-12','17:30:00',3,3),(3,'2022-10-11','18:10:00',2,2),(4,'2025-10-13','20:30:00',2,1),(5,'2025-02-01','18:50:00',12,1),(6,'2025-02-07','12:30:00',10,2),(7,'2025-02-08','19:10:00',12,6),(8,'2025-02-12','20:00:00',1,3),(9,'2025-02-13','11:30:00',2,2),(10,'2025-02-14','12:00:00',5,5),(11,'2025-02-14','19:10:00',10,4),(12,'2025-02-14','20:20:00',6,6),(13,'2025-02-28',NULL,6,NULL),(99,'2022-12-10',NULL,99,99);
 /*!40000 ALTER TABLE `bookings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -54,13 +54,13 @@ DROP TABLE IF EXISTS `customers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `customers` (
-  `CustomerID` int NOT NULL AUTO_INCREMENT,
-  `FirstName` varchar(45) NOT NULL,
-  `LastName` varchar(20) NOT NULL,
+  `CustomerID` int NOT NULL,
+  `FirstName` varchar(45) DEFAULT NULL,
+  `LastName` varchar(20) DEFAULT NULL,
   `Email` varchar(100) DEFAULT NULL,
   `Phone` int DEFAULT NULL,
   PRIMARY KEY (`CustomerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (1,'Anna','Iversen','anna.iversen@gmail.com',351259642),(2,'Joakim','Iversen','j.iversen@yahoo.com',352253781),(3,'Vanessa','McCarthy','vanessa.m@globalsuperstore.com',361255597),(4,'Marcos','Romero','marcos.romero2208@mangatagallo.us',451252112),(5,'Hiroki','Yamane','hyamane.smile@mitsubishi.com',359439642),(6,'Diana','Pinto','diana.pinto@finance.org.us',751100242);
+INSERT INTO `customers` VALUES (1,'Anna','Iversen','anna.iversen@gmail.com',351259642),(2,'Joakim','Iversen','j.iversen@yahoo.com',352253781),(3,'Vanessa','McCarthy','vanessa.m@globalsuperstore.com',361255597),(4,'Marcos','Romero','marcos.romero2208@mangatagallo.us',451252112),(5,'Hiroki','Yamane','hyamane.smile@mitsubishi.com',359439642),(6,'Diana','Pinto','diana.pinto@finance.org.us',751100242),(99,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,11 +81,11 @@ DROP TABLE IF EXISTS `deliveries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `deliveries` (
-  `DeliveryID` int NOT NULL AUTO_INCREMENT,
+  `DeliveryID` int NOT NULL,
   `DeliveryDate` date DEFAULT NULL,
-  `Status` varchar(20) NOT NULL,
+  `Status` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`DeliveryID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,7 +94,7 @@ CREATE TABLE `deliveries` (
 
 LOCK TABLES `deliveries` WRITE;
 /*!40000 ALTER TABLE `deliveries` DISABLE KEYS */;
-INSERT INTO `deliveries` VALUES (1,'2025-02-01','Order paid'),(2,NULL,'Order served'),(3,'2025-02-08','Order paid'),(4,NULL,'To be served'),(5,NULL,'To be served'),(6,NULL,'To be served'),(7,NULL,'To be served');
+INSERT INTO `deliveries` VALUES (1,'2022-10-10','Order paid'),(2,NULL,'Order served'),(3,'2022-10-11','Order paid'),(4,NULL,'To be served'),(5,NULL,'To be served'),(6,NULL,'To be served'),(7,NULL,'To be served');
 /*!40000 ALTER TABLE `deliveries` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,12 +106,12 @@ DROP TABLE IF EXISTS `items`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `items` (
-  `ItemID` int NOT NULL AUTO_INCREMENT,
+  `ItemID` int NOT NULL,
   `ItemName` varchar(30) NOT NULL,
   `Type` varchar(30) DEFAULT NULL,
   `Price` int DEFAULT NULL,
   PRIMARY KEY (`ItemID`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,8 +133,8 @@ DROP TABLE IF EXISTS `menuitems`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `menuitems` (
   `MenuItemID` int NOT NULL,
-  `MenuID` int NOT NULL,
-  `ItemID` int NOT NULL,
+  `MenuID` int DEFAULT NULL,
+  `ItemID` int DEFAULT NULL,
   PRIMARY KEY (`MenuItemID`),
   KEY `menu_id_fk_idx` (`MenuID`),
   KEY `item_id_fk_idx` (`ItemID`),
@@ -161,7 +161,7 @@ DROP TABLE IF EXISTS `menus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `menus` (
-  `MenuID` int NOT NULL AUTO_INCREMENT,
+  `MenuID` int NOT NULL,
   `MenuName` varchar(30) NOT NULL,
   `Cuisine` varchar(30) DEFAULT NULL,
   `Starter` varchar(30) DEFAULT NULL,
@@ -169,7 +169,7 @@ CREATE TABLE `menus` (
   `Dessert` varchar(30) DEFAULT NULL,
   `TotalPrice` decimal(4,2) DEFAULT NULL,
   PRIMARY KEY (`MenuID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -190,7 +190,7 @@ DROP TABLE IF EXISTS `orders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `orders` (
-  `OrderID` int NOT NULL AUTO_INCREMENT,
+  `OrderID` int NOT NULL,
   `Quantity` int DEFAULT NULL,
   `TotalCost` decimal(10,0) DEFAULT NULL,
   `BookingID` int DEFAULT NULL,
@@ -206,7 +206,7 @@ CREATE TABLE `orders` (
   CONSTRAINT `delivery_id_fk` FOREIGN KEY (`DeliveryID`) REFERENCES `deliveries` (`DeliveryID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `menu_id_fk` FOREIGN KEY (`MenuID`) REFERENCES `menus` (`MenuID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `staff_id_fk` FOREIGN KEY (`StaffID`) REFERENCES `staff` (`StaffID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -215,7 +215,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,1,56,1,2,1,1),(2,2,92,2,7,5,2),(3,1,78,3,4,2,3),(4,1,56,4,6,6,4),(6,2,120,8,1,6,6),(7,4,184,7,3,6,7);
+INSERT INTO `orders` VALUES (1,1,56,1,2,1,1),(2,2,92,2,7,5,2),(3,1,78,3,4,2,3),(4,5,280,4,6,6,4),(5,3,138,5,7,6,5),(6,2,120,8,1,6,6),(7,4,184,7,3,6,7);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,11 +242,11 @@ DROP TABLE IF EXISTS `staff`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `staff` (
   `StaffID` int NOT NULL,
-  `FirstName` varchar(20) NOT NULL,
-  `LastName` varchar(45) NOT NULL,
+  `FirstName` varchar(20) DEFAULT NULL,
+  `LastName` varchar(45) DEFAULT NULL,
   `Role` varchar(20) DEFAULT NULL,
   `Address` varchar(100) DEFAULT NULL,
-  `Phone` int NOT NULL,
+  `Phone` int DEFAULT NULL,
   `Email` varchar(100) DEFAULT NULL,
   `Salary` decimal(7,2) DEFAULT NULL,
   PRIMARY KEY (`StaffID`)
@@ -359,25 +359,32 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`giang`@`%` PROCEDURE `AddBooking`(booking_date DATE, table_no INT, customer_id INT)
+CREATE DEFINER=`giang`@`%` PROCEDURE `AddBooking`(booking_id INT, customer_id INT, table_no INT, booking_date DATE)
 BEGIN
-	DECLARE number_of_bookings INT;
-	START TRANSACTION;
-    INSERT INTO Bookings(BookingDate, TableNo, CustomerID)
-    VALUES 
-    (booking_date, table_no, customer_id);
-    
-    SELECT COUNT(BookingID) INTO number_of_bookings
-    FROM Bookings
-    WHERE BookingDate = booking_date AND TableNo = table_no;
-	IF number_of_bookings > 1 THEN
-		ROLLBACK;
-        SELECT CONCAT('Table ', table_no, ' is already booked - booking cancelled') AS 'Booking Status';
-    ELSE 
-		COMMIT;
-		SELECT CONCAT('Table ', table_no, ' has been booked for ', booking_date, '. New booking added.') AS 'Booking Status';
+	DECLARE number_of_bookings, number_of_bookingIDs INT;	
+    -- Insert into to Customers table in case the customer does not exist to avoid the foreign key constraint error
+    INSERT IGNORE INTO Customers(CustomerID) VALUES (customer_id);
+    -- Check if the BookingID exists, if it does -> ouput a message, if not carry on with the addition of booking
+    SELECT COUNT(BookingID) INTO number_of_bookingIDs
+    FROM Bookings WHERE BookingID = booking_id;
+    IF number_of_bookingIDs > 0 THEN
+		SELECT CONCAT('The BookingID - ', booking_id, ' has been taken. Select another one.') AS 'Message';
+    ELSE
+		START TRANSACTION;
+        INSERT INTO Bookings(BookingID, BookingDate, TableNo, CustomerID)
+		VALUES 
+		(booking_id, booking_date, table_no, customer_id);
+		SELECT COUNT(BookingID) INTO number_of_bookings
+		FROM Bookings
+		WHERE BookingDate = booking_date AND TableNo = table_no;
+		IF number_of_bookings > 1 THEN
+			ROLLBACK;
+			SELECT CONCAT('Table ', table_no, ' is already booked - booking cancelled.') AS 'Booking Status';
+		ELSE 
+			COMMIT;
+			SELECT CONCAT('Table ', table_no, ' has been booked for ', booking_date, '. New booking added.') AS 'Booking Status';
+		END IF;
 	END IF;
-
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -396,23 +403,24 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`giang`@`%` PROCEDURE `AddValidBooking`(booking_date DATE, table_no INT)
 BEGIN
-	DECLARE number_of_bookings INT;
+	DECLARE number_of_bookings, max_booking_id INT;
 	START TRANSACTION;
-    INSERT INTO Bookings(BookingDate, TableNo)
+    SELECT Max(BookingID) INTO max_booking_id
+    FROM Bookings;
+    INSERT INTO Bookings(BookingID, BookingDate, TableNo)
     VALUES 
-    (booking_date, table_no);
+    (max_booking_id+1, booking_date, table_no);
     
     SELECT COUNT(BookingID) INTO number_of_bookings
     FROM Bookings
     WHERE BookingDate = booking_date AND TableNo = table_no;
 	IF number_of_bookings > 1 THEN
 		ROLLBACK;
-        SELECT CONCAT('Table ', table_no, ' is already booked - booking cancelled') AS 'Booking Status';
+        SELECT CONCAT('Table ', table_no, ' is already booked on ', booking_date, ' - booking cancelled') AS 'Booking Status';
     ELSE 
 		COMMIT;
 		SELECT CONCAT('Table ', table_no, ' has been booked for ', booking_date) AS 'Booking Status';
 	END IF;
-
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -431,9 +439,18 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`giang`@`%` PROCEDURE `CancelBooking`(booking_id INT)
 BEGIN
-	DELETE FROM Bookings
-    WHERE BookingID = booking_id;
-    SELECT CONCAT('Booking ', booking_id, ' cancelled.') AS Confirmation;
+	-- Check if the booking_id exists first
+    DECLARE number_of_bookingids INT;
+    SELECT COUNT(BookingID) INTO number_of_bookingids
+    FROM Bookings WHERE BookingID = booking_id;
+    IF number_of_bookingids = 0 THEN
+		-- Generate a message if the BookingID does not exist.
+		SELECT CONCAT('The BookingID ', booking_id, ' does not exist. Select another one.') AS 'Message';
+	ELSE
+		DELETE FROM Bookings
+		WHERE BookingID = booking_id;
+		SELECT CONCAT('Booking ', booking_id, ' cancelled.') AS Confirmation;
+	END IF;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -478,7 +495,7 @@ BEGIN
     WHERE BookingDate = booking_date AND TableNo = table_no;
     SELECT 
 		CASE 
-			WHEN number_of_bookings > 0 THEN CONCAT('Table ', table_no, ' is already booked')
+			WHEN number_of_bookings > 0 THEN CONCAT('Table ', table_no, ' is already booked on ', booking_date)
             ELSE CONCAT('Table ', table_no, ' is available on ', booking_date)
 		END AS 'Booking Status';
 END ;;
@@ -519,23 +536,23 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`giang`@`%` PROCEDURE `ManageBooking`(booking_date DATE, table_no INT)
 BEGIN
-	DECLARE number_of_bookings INT;
+	DECLARE number_of_bookings, max_booking_id INT;
 	START TRANSACTION;
-    INSERT INTO Bookings(BookingDate, TableNo)
+    SELECT Max(BookingID) INTO max_booking_id
+    FROM Bookings;
+    INSERT INTO Bookings(BookingID, BookingDate, TableNo)
     VALUES 
-    (booking_date, table_no);
-    
+    (max_booking_id+1, booking_date, table_no);    
     SELECT COUNT(BookingID) INTO number_of_bookings
     FROM Bookings
     WHERE BookingDate = booking_date AND TableNo = table_no;
 	IF number_of_bookings > 1 THEN
 		ROLLBACK;
-        SELECT CONCAT('Table ', table_no, ' is already booked - booking cancelled') AS 'Booking Status';
+        SELECT CONCAT('Table ', table_no, ' is already booked on ', booking_date, ' - booking cancelled.') AS 'Booking Status';
     ELSE 
 		COMMIT;
-		SELECT CONCAT('Table ', table_no, ' has been booked for ', booking_date) AS 'Booking Status';
+		SELECT CONCAT('Table ', table_no, ' has been booked for ', booking_date, '.') AS 'Booking Status';
 	END IF;
-
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -554,10 +571,19 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`giang`@`%` PROCEDURE `UpdateBooking`(booking_id INT, update_booking_date DATE)
 BEGIN
-	UPDATE Bookings
-    SET BookingDate = update_booking_date
-    WHERE BookingID = booking_id;
-    SELECT CONCAT('Booking ', booking_id, ' updated.') AS Confirmation;
+	-- Check if the booking_id exists first
+    DECLARE number_of_bookingids INT;
+    SELECT COUNT(BookingID) INTO number_of_bookingids
+    FROM Bookings WHERE BookingID = booking_id;
+    IF number_of_bookingids = 0 THEN
+		-- Generate a message if the BookingID does not exist.
+		SELECT CONCAT('The BookingID ', booking_id, ' does not exist. Select another one.') AS 'Message';
+	ELSE
+		UPDATE Bookings
+		SET BookingDate = update_booking_date
+		WHERE BookingID = booking_id;
+		SELECT CONCAT('Booking ', booking_id, ' updated.') AS Confirmation;
+	END IF;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -592,4 +618,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-14 16:43:51
+-- Dump completed on 2025-02-27 10:30:53
